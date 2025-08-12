@@ -42,26 +42,26 @@ export const albums = (() => {
       };
     });
 
-    // For Album 1, override with the provided file names as titles (URL maps directly to those file names)
+    // For Album 1, explicitly map visible titles to their correct mp3 filenames
     if (idx === 1) {
-      const titles = [
-        "A Stand That Existed.mp3",
-        "Allocation Task Force.mp3",
-        "Alternates.mp3",
-        "Andr.mp3",
-        "Anywhere in The Universe.mp3",
-        "Average Alternate.mp3",
-        "Casual.mp3",
-        "Core of The Universe and All Knowledge.mp3",
+      const map = [
+        ["A Stand that Existed", "A Stand That Existed.mp3"],
+        ["Allocation Task Force", "Allocation Task Force.mp3"],
+        ["Alternates", "Alternates.mp3"],
+        ["Andr", "Andr.mp3"],
+        ["Anywhere in The Universe", "Anywhere in The Universe.mp3"],
+        ["Average Alternate", "Average Alternate.mp3"],
+        ["Casual", "Casual.mp3"],
+        ["Core of The Universe and All Knowledge", "Core of The Universe and All Knowledge.mp3"],
       ];
-      tracks = titles.map((title, tIdx) => {
-        const fallbackUrl = helix(((base + tIdx - 1) % 16) + 1);
+      tracks = map.map(([display, file], tIdx) => {
+        const encoded = file.replace(/ /g, "%20"); // only convert spaces to %20
         return {
           id: `${idx}-${tIdx + 1}`,
-          title, // keep name exactly as file name
+          title: display,               // what users see in the list
           artist,
-          duration: 210 + 12 * tIdx, // simple varied placeholder durations
-          url: urlFromTitle(title, fallbackUrl),
+          duration: 210 + 12 * tIdx,    // placeholder durations
+          url: `./audio/${encoded}`,    // direct link to the mp3 file
           explicit: false
         };
       });
