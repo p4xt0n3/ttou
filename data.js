@@ -9,15 +9,16 @@ export const albums = (() => {
   // helper: if a track title already looks like a filename, map URL to local /audio/<title>
   const urlFromTitle = (title, fallback) => {
     if (typeof title === "string" && /\.mp3$/i.test(title.trim())) {
-      // Use a relative audio folder; file name comes directly from the title
-      return `./audio/${encodeURIComponent(title.trim())}`;
+      // Replace spaces with %20 only (as requested), keep other characters as-is
+      const fileName = title.trim().replace(/ /g, "%20");
+      return `./audio/${fileName}`;
     }
     return fallback;
   };
 
   // build 10 albums, 5 tracks each by default
   const names = Array.from({ length: 10 }, (_, i) =>
-    i === 0 ? "The Tale of Universe 1" : `The Tale of Universe ${i + 1}`
+    i === 0 ? "The Tale of Universe OST 1" : `The Tale of Universe OST ${i + 1}`
   );
 
   const byIdx = names.map((name, i) => {
