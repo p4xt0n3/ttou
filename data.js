@@ -6,6 +6,15 @@ export const albums = (() => {
   const helix = (n) =>
     `https://www.soundhelix.com/examples/mp3/SoundHelix-Song-${n}.mp3`;
 
+  // helper: if a track title already looks like a filename, map URL to local /audio/<title>
+  const urlFromTitle = (title, fallback) => {
+    if (typeof title === "string" && /\.mp3$/i.test(title.trim())) {
+      // Use a relative audio folder; file name comes directly from the title
+      return `./audio/${encodeURIComponent(title.trim())}`;
+    }
+    return fallback;
+  };
+
   // build 10 albums, 5 tracks each by default
   const names = Array.from({ length: 10 }, (_, i) =>
     i === 0 ? "The Tale of Universe 1" : `The Tale of Universe ${i + 1}`
@@ -20,17 +29,19 @@ export const albums = (() => {
     const base = 1 + (i * 3) % 12;
     let tracks = Array.from({ length: 5 }, (_, t) => {
       const tn = base + t;
+      const title = `Movement ${t + 1}`;
+      const fallbackUrl = helix(((tn - 1) % 16) + 1);
       return {
         id: `${idx}-${t + 1}`,
-        title: `Movement ${t + 1}`,
+        title,
         artist,
         duration: 210 + 20 * t, // seconds
-        url: helix(((tn - 1) % 16) + 1),
+        url: urlFromTitle(title, fallbackUrl),
         explicit: false
       };
     });
 
-    // For Album 1, override with the provided file names as titles (we'll map to helix audio sources for now)
+    // For Album 1, override with the provided file names as titles (URL maps directly to those file names)
     if (idx === 1) {
       const titles = [
         "A Stand That Existed.mp3",
@@ -42,14 +53,17 @@ export const albums = (() => {
         "Casual.mp3",
         "Core of The Universe and All Knowledge.mp3",
       ];
-      tracks = titles.map((title, tIdx) => ({
-        id: `${idx}-${tIdx + 1}`,
-        title, // keep name exactly as file name
-        artist,
-        duration: 210 + 12 * tIdx, // simple varied placeholder durations
-        url: helix(((base + tIdx - 1) % 16) + 1),
-        explicit: false
-      }));
+      tracks = titles.map((title, tIdx) => {
+        const fallbackUrl = helix(((base + tIdx - 1) % 16) + 1);
+        return {
+          id: `${idx}-${tIdx + 1}`,
+          title, // keep name exactly as file name
+          artist,
+          duration: 210 + 12 * tIdx, // simple varied placeholder durations
+          url: urlFromTitle(title, fallbackUrl),
+          explicit: false
+        };
+      });
     }
 
     return {
