@@ -19,7 +19,15 @@ document.addEventListener('DOMContentLoaded', () => {
                 { title: "G Foundation", file: "G Foundation.mp3" },
                 { title: "G-033", file: "G-033.mp3" },
                 { title: "G-Adv", file: "G-Adv.mp3" },
-                { title: "Guardian of the Cosmos", file: "Guardian of the Cosmos.mp3" }
+                { title: "Guardian of the Cosmos", file: "Guardian of the Cosmos.mp3" },
+                { title: "H0RR0R", file: "H0RR0R.mp3" },
+                { title: "Holyght", file: "Holyght.mp3" },
+                { title: "I can see", file: "I can see.mp3" },
+                { title: "I care about whatever I see", file: "I care about whatever I see.mp3" },
+                { title: "Immortal Ascension", file: "Immortal Ascension.mp3" },
+                { title: "Joker Joker", file: "Joker Joker.mp3" },
+                { title: "Kamustrophy", file: "Kamustrophy.mp3" },
+                { title: "M4N1F35T10N", file: "M4N1F35T10N.mp3" }
             ]
         }
         // Future albums can be added here with keys like "ost-2", etc.
