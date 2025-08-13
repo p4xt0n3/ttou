@@ -12,14 +12,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 { title: "Average Alternate", file: "Average Alternate.mp3" },
                 { title: "Casual", file: "Casual.mp3" },
                 { title: "Core of The Universe and All Knowledge", file: "Core of The Universe and All Knowledge.mp3" },
-                { title: "Cube of Sixth Stage Seal" },
-                { title: "Cyber Trap" },
-                { title: "Der Teemeister aus der Leere" },
-                { title: "Futuristic World" },
-                { title: "G Foundation" },
-                { title: "G-033" },
-                { title: "G-Adv" },
-                { title: "Guardian of the Cosmos" }
+                { title: "Cube of Sixth Stage Seal", file: "Cube of Sixth Stage Seal.mp3" },
+                { title: "Cyber Trap", file: "Cyber Trap.mp3" },
+                { title: "Der Teemeister aus der Leere", file: "Der Teemeister aus der Leere.mp3" },
+                { title: "Futuristic World", file: "Futuristic World.mp3" },
+                { title: "G Foundation", file: "G Foundation.mp3" },
+                { title: "G-033", file: "G-033.mp3" },
+                { title: "G-Adv", file: "G-Adv.mp3" },
+                { title: "Guardian of the Cosmos", file: "Guardian of the Cosmos.mp3" }
             ]
         }
         // Future albums can be added here with keys like "ost-2", etc.
