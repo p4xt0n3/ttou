@@ -206,6 +206,15 @@ h1 {
     background-color: #3a3a3a;
 }
 
+.song-list li.disabled {
+    color: #666;
+    cursor: not-allowed;
+}
+
+.song-list li.disabled:hover {
+    background-color: transparent;
+}
+
 .song-list li .song-title {
     flex-grow: 1;
 }
