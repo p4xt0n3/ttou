@@ -27,7 +27,22 @@ document.addEventListener('DOMContentLoaded', () => {
                 { title: "Immortal Ascension", file: "Immortal Ascension.mp3" },
                 { title: "Joker Joker", file: "Joker Joker.mp3" },
                 { title: "Kamustrophy", file: "Kamustrophy.mp3" },
-                { title: "M4N1F35T10N", file: "M4N1F35T10N.mp3" }
+                { title: "M4N1F35T10N", file: "M4N1F35T10N.mp3" },
+                { title: "Metal Army", file: "Metal Army.mp3" },
+                { title: "Metal Scratches", file: "Metal Scratches.mp3" },
+                { title: "Overload", file: "Overload.mp3" },
+                { title: "Technique of Brain", file: "Technique of Brain.mp3" },
+                { title: "The Alternate Scientist", file: "The Alternate Scientist.mp3" },
+                { title: "The Emperor", file: "The Emperor.mp3" },
+                { title: "The First Alternate", file: "The First Alternate.mp3" },
+                { title: "The LordGods", file: "The LordGods.mp3" },
+                { title: "The Most Perfect Alternate Exist", file: "The Most Perfect Alternate Exist.mp3" },
+                { title: "The Space Blitzkrieg", file: "The Space Blitzkrieg.mp3" },
+                { title: "The True Speech", file: "The True Speech.mp3" },
+                { title: "TV-er", file: "TV-er.mp3" },
+                { title: "Universal Assassin Organization", file: "Universal Assassin Organization.mp3" },
+                { title: "Universal Weapon Association", file: "Universal Weapon Association.mp3" },
+                { title: "Veroy", file: "Veroy.mp3" }
             ]
         }
         // Future albums can be added here with keys like "ost-2", etc.
@@ -37,6 +52,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const modal = document.getElementById('music-modal');
     const modalView = document.getElementById('modal-view');
     const closeModalButton = document.querySelector('.close-button');
+
+    // Theme toggle
+    const themeToggleButton = document.getElementById('theme-toggle');
+    const body = document.body;
 
     // Player elements
     const musicPlayer = document.getElementById('music-player');
@@ -55,6 +74,22 @@ document.addEventListener('DOMContentLoaded', () => {
     let currentPlaylist = [];
     let currentIndex = -1;
     let isPlaying = false;
+
+    const setupTheme = () => {
+        const preferredTheme = localStorage.getItem('theme');
+        if (preferredTheme === 'light') {
+            body.classList.add('light-mode');
+        }
+
+        themeToggleButton.addEventListener('click', () => {
+            body.classList.toggle('light-mode');
+            if (body.classList.contains('light-mode')) {
+                localStorage.setItem('theme', 'light');
+            } else {
+                localStorage.setItem('theme', 'dark');
+            }
+        });
+    };
 
     const formatTime = (seconds) => {
         const minutes = Math.floor(seconds / 60);
@@ -207,4 +242,7 @@ document.addEventListener('DOMContentLoaded', () => {
             modal.style.display = 'none';
         }
     });
+
+    // Initialize theme
+    setupTheme();
 });
