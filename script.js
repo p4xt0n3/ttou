@@ -87,6 +87,53 @@ document.addEventListener('DOMContentLoaded', () => {
                 { title: "The Old Duke", file: "The Old Duke.mp3" },
                 { title: "Xylo the Phone", file: "Xylo the Phone.mp3" }
             ]
+        },
+        "ost-3": {
+            title: "The Tale of Universe #3",
+            coverArt: "moon.jpg",
+            songs: [
+                { title: "Kearo", file: "Kearo.mp3" },
+                { title: "Kirk", file: "Kirk.mp3" },
+                { title: "Prpr", file: "Prpr.mp3" },
+                { title: "Trant", file: "Trant.mp3" },
+                { title: "Cotton", file: "Cotton.mp3" },
+                { title: "Darkest Tide", file: "Darkest Tide.mp3" },
+                { title: "Fearless, Braveness, Hopeless..", file: "Fearless, Braveness, Hopeless...mp3" },
+                { title: "Industrious", file: "Industrious.mp3" },
+                { title: "Mechanics", file: "Mechanics.mp3" },
+                { title: "Morphin and Mimicin", file: "Morphin and Mimicin.mp3" },
+                { title: "The Universe Biggest Arm Dealer", file: "The Universe Biggest Arm Dealer.mp3" },
+                { title: "Buoyancy", file: "Buoyancy.mp3" },
+                { title: "Duo-Minded", file: "Duo-Minded.mp3" },
+                { title: "End", file: "End.mp3" },
+                { title: "His and Her Creation", file: "His and Her Creation.mp3" },
+                { title: "Iu", file: "Iu.mp3" },
+                { title: "Jumping on life", file: "Jumping on life.mp3" },
+                { title: "Mess", file: "Mess.mp3" },
+                { title: "The Rock n Roll Music", file: "The Rock n Roll Music.mp3" },
+                { title: "Unforgettable Dreams", file: "Unforgettable Dreams.mp3" },
+                { title: "Deep Water", file: "Deep Water.mp3" },
+                { title: "Listen", file: "Listen.mp3" },
+                { title: "Man im dead", file: "Man im dead.mp3" },
+                { title: "Nah Im Done", file: "Nah Im Done.mp3" },
+                { title: "Ohioic", file: "Ohioic.mp3" },
+                { title: "Other side", file: "Other side.mp3" },
+                { title: "Pre Timeskip", file: "Pre Timeskip.mp3" },
+                { title: "Scrrr", file: "Scrrr.mp3" },
+                { title: "Undead Rising", file: "Undead Rising.mp3" },
+                { title: "What", file: "What.mp3" },
+                { title: "C3RT41N", file: "C3RT41N.mp3" },
+                { title: "Core", file: "Core.mp3" },
+                { title: "Crunchy", file: "Crunchy.mp3" },
+                { title: "Cyst", file: "Cyst.mp3" },
+                { title: "Epicness", file: "Epicness.mp3" },
+                { title: "Fantastic", file: "Fantastic.mp3" },
+                { title: "Macula", file: "Macula.mp3" },
+                { title: "Pablo", file: "Pablo.mp3" },
+                { title: "Prediction", file: "Prediction.mp3" },
+                { title: "Roofing", file: "Roofing.mp3" },
+                { title: "Runting", file: "Runting.mp3" }
+            ]
         }
         // Future albums can be added here with keys like "ost-2", etc.
     };
