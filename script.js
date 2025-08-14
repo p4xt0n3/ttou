@@ -44,6 +44,20 @@ document.addEventListener('DOMContentLoaded', () => {
                 { title: "Universal Weapon Association", file: "Universal Weapon Association.mp3" },
                 { title: "Veroy", file: "Veroy.mp3" }
             ]
+        },
+        "ost-2": {
+            title: "The Tale of Universe #2",
+            coverArt: "moon.jpg",
+            songs: [
+                { title: "Purple Flash", file: "Purple Flash.mp3" },
+                { title: "Soft tunes", file: "Soft tunes.mp3" },
+                { title: "True Nature of Nullify Everything", file: "True Nature of Nullify Everything.mp3" },
+                { title: "Universe Empire", file: "Universe Empire.mp3" },
+                { title: "Descendant", file: "Descendant.mp3" },
+                { title: "Extended Madness Distorted Awareness Disorder", file: "Extended Madness Distorted Awareness Disorder.mp3" },
+                { title: "K@n0sk1", file: "K@n0sk1.mp3" },
+                { title: "Late Night Whispers", file: "Late Night Whispers.mp3" }
+            ]
         }
         // Future albums can be added here with keys like "ost-2", etc.
     };
