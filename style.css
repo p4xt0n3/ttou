@@ -75,6 +75,14 @@ h1 {
     margin: 0;
     font-weight: 700;
     letter-spacing: 1px;
+    text-align: left;
+    flex-grow: 1;
+}
+
+.header-controls {
+    display: flex;
+    gap: 10px;
+    align-items: center;
 }
 
 .album-group {
@@ -462,6 +470,11 @@ audio {
     color: var(--player-btn-color);
 }
 
+#loop-button.active svg {
+    color: var(--spotify-green);
+    stroke: var(--spotify-green);
+}
+
 /* Theme Toggle Button */
 .theme-btn {
     background: none;
@@ -488,3 +501,80 @@ audio {
 
 body.light-mode .theme-btn .moon-icon { display: block; }
 body.light-mode .theme-btn .sun-icon { display: none; }
+
+/* Log Panel */
+.log-panel {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 320px;
+    height: 100%;
+    background-color: var(--bg-secondary);
+    border-left: 1px solid var(--border-primary);
+    box-shadow: -5px 0 15px var(--shadow-color);
+    z-index: 1500;
+    transform: translateX(100%);
+    transition: transform 0.4s ease-in-out;
+    display: flex;
+    flex-direction: column;
+}
+
+.log-panel.open {
+    transform: translateX(0);
+}
+
+.log-panel-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    border-bottom: 1px solid var(--border-primary);
+}
+
+.log-panel-header h3 {
+    margin: 0;
+    font-size: 1.2rem;
+}
+
+.log-close-button {
+    background: none;
+    border: none;
+    color: var(--modal-close-color);
+    font-size: 30px;
+    font-weight: bold;
+    cursor: pointer;
+    line-height: 1;
+    padding: 0 5px;
+}
+
+.log-close-button:hover {
+    color: var(--text-primary);
+}
+
+.log-panel-content {
+    padding: 20px;
+    overflow-y: auto;
+    flex-grow: 1;
+}
+
+.log-entry {
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--border-secondary);
+}
+.log-entry:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+}
+
+.log-date {
+    font-size: 0.8em;
+    color: var(--text-secondary);
+    margin: 0 0 5px 0;
+}
+
+.log-text {
+    margin: 0;
+    font-size: 0.95em;
+    line-height: 1.5;
+}
