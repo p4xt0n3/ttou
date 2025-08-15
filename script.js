@@ -186,6 +186,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const modalView = document.getElementById('modal-view');
     const closeModalButton = document.querySelector('.close-button');
 
+    // Search Modal Elements
+    const searchButton = document.getElementById('search-button');
+    const searchModal = document.getElementById('search-modal');
+    const searchCloseButton = searchModal.querySelector('.close-button');
+    const searchInput = document.getElementById('search-input');
+    const searchResultsList = document.getElementById('search-results');
+
     // Log Panel Elements
     const logButton = document.getElementById('log-button');
     const logPanel = document.getElementById('log-panel');
@@ -214,6 +221,24 @@ document.addEventListener('DOMContentLoaded', () => {
     let currentPlaylist = [];
     let currentIndex = -1;
     let isPlaying = false;
+    let allSongs = [];
+
+    const buildAllSongsList = () => {
+        allSongs = [];
+        for (const albumId in musicData) {
+            const album = musicData[albumId];
+            album.songs.forEach((song, index) => {
+                if (song.file) { // Only include playable songs
+                    allSongs.push({
+                        ...song,
+                        albumId: albumId,
+                        albumTitle: album.title,
+                        indexInAlbum: index
+                    });
+                }
+            });
+        }
+    };
 
     const setupTheme = () => {
         const preferredTheme = localStorage.getItem('theme');
@@ -331,6 +356,54 @@ document.addEventListener('DOMContentLoaded', () => {
         return null;
     };
 
+    // Search Logic
+    const openSearchModal = () => {
+        searchModal.style.display = 'block';
+        searchInput.focus();
+    };
+
+    const closeSearchModal = () => {
+        searchModal.style.display = 'none';
+        searchInput.value = '';
+        searchResultsList.innerHTML = '';
+    };
+
+    const performSearch = () => {
+        const query = searchInput.value.toLowerCase().trim();
+        searchResultsList.innerHTML = '';
+
+        if (query.length === 0) {
+            return;
+        }
+
+        const results = allSongs.filter(song => song.title.toLowerCase().includes(query));
+
+        if (results.length > 0) {
+            results.forEach(song => {
+                const li = document.createElement('li');
+                li.innerHTML = `
+                    <span class="song-title">${song.title}</span>
+                    <span class="song-album">${song.albumTitle}</span>
+                `;
+                li.addEventListener('click', () => {
+                    const targetAlbum = musicData[song.albumId];
+                    if (targetAlbum) {
+                        currentPlaylist = targetAlbum.songs;
+                        playSong(song.indexInAlbum);
+                        closeSearchModal();
+                    }
+                });
+                searchResultsList.appendChild(li);
+            });
+        } else {
+            searchResultsList.innerHTML = `<li class="disabled">No results found for "${searchInput.value}"</li>`;
+        }
+    };
+    
+    searchButton.addEventListener('click', openSearchModal);
+    searchCloseButton.addEventListener('click', closeSearchModal);
+    searchInput.addEventListener('input', performSearch);
+
     // Log Panel Logic
     logButton.addEventListener('click', () => {
         logPanel.classList.add('open');
@@ -427,6 +500,9 @@ document.addEventListener('DOMContentLoaded', () => {
         if (event.target == modal) {
             modal.style.display = 'none';
         }
+        if (event.target == searchModal) {
+            closeSearchModal();
+        }
         // Close log panel if clicking outside of it
         if (logPanel.classList.contains('open') && !logPanel.contains(event.target) && event.target !== logButton) {
             logPanel.classList.remove('open');
@@ -435,4 +511,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Initialize theme
     setupTheme();
+    // Build the searchable song list
+    buildAllSongsList();
 });
