@@ -155,6 +155,23 @@ h1 {
     box-shadow: 0 8px 30px var(--glow-color); /* A subtle glow */
 }
 
+/* Copyright footer */
+#copyright-footer {
+    padding: 20px;
+    color: var(--text-secondary);
+    font-size: 0.9em;
+}
+
+#copyright-notice {
+    cursor: pointer;
+    transition: color 0.2s;
+    margin: 0;
+}
+
+#copyright-notice:hover {
+    color: var(--text-primary);
+}
+
 /* Modal styles */
 .modal {
     display: none; /* Hidden by default */
@@ -322,6 +339,40 @@ h1 {
 .song-list li.playing {
     background-color: var(--bg-hover);
     color: var(--spotify-green); /* Spotify green */
+}
+
+/* Copyright Modal Content */
+#copyright-view {
+    text-align: left;
+    line-height: 1.6;
+    font-size: 0.95em;
+    max-height: 70vh;
+    overflow-y: auto;
+    padding-right: 15px; /* for scrollbar */
+}
+
+#copyright-view h3 {
+    text-align: center;
+    margin-top: 0;
+    margin-bottom: 20px;
+}
+
+#copyright-view p {
+    margin-bottom: 1em;
+}
+
+#copyright-view ul {
+    list-style-type: disc;
+    padding-left: 25px;
+    margin-bottom: 1em;
+}
+
+.copyright-image {
+    display: block;
+    max-width: 200px;
+    margin: 30px auto 10px;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px var(--shadow-color);
 }
 
 audio {

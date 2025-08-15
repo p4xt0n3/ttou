@@ -193,6 +193,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const searchInput = document.getElementById('search-input');
     const searchResultsList = document.getElementById('search-results');
 
+    // Copyright Modal Elements
+    const copyrightNotice = document.getElementById('copyright-notice');
+    const copyrightModal = document.getElementById('copyright-modal');
+    const copyrightCloseButton = copyrightModal.querySelector('.close-button');
+
     // Log Panel Elements
     const logButton = document.getElementById('log-button');
     const logPanel = document.getElementById('log-panel');
@@ -404,6 +409,15 @@ document.addEventListener('DOMContentLoaded', () => {
     searchCloseButton.addEventListener('click', closeSearchModal);
     searchInput.addEventListener('input', performSearch);
 
+    // Copyright Modal Logic
+    copyrightNotice.addEventListener('click', () => {
+        copyrightModal.style.display = 'block';
+    });
+
+    copyrightCloseButton.addEventListener('click', () => {
+        copyrightModal.style.display = 'none';
+    });
+
     // Log Panel Logic
     logButton.addEventListener('click', () => {
         logPanel.classList.add('open');
@@ -502,6 +516,9 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         if (event.target == searchModal) {
             closeSearchModal();
+        }
+        if (event.target == copyrightModal) {
+            copyrightModal.style.display = 'none';
         }
         // Close log panel if clicking outside of it
         if (logPanel.classList.contains('open') && !logPanel.contains(event.target) && event.target !== logButton) {
