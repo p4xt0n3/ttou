@@ -134,6 +134,49 @@ document.addEventListener('DOMContentLoaded', () => {
                 { title: "Roofing", file: "Roofing.mp3" },
                 { title: "Runting", file: "Runting.mp3" }
             ]
+        },
+        "ost-4": {
+            title: "The Tale of Universe #4",
+            coverArt: "moon.jpg",
+            songs: [
+                { title: "1N73RN4L", file: "1N73RN4L.mp3" },
+                { title: "7-11", file: "7-11.mp3" },
+                { title: "86-79-73-68-32-73-83-32-65-80-80-82-79-65-67-72-73-78-71", file: "86-79-73-68-32-73-83-32-65-80-80-82-79-65-67-72-73-78-71.mp3" },
+                { title: "1478", file: "1478.mp3" },
+                { title: "1934", file: "1934.mp3" },
+                { title: "Beyond the Veil", file: "Beyond the Veil.mp3" },
+                { title: "CH1LL1NG", file: "CH1LL1NG.mp3" },
+                { title: "Creek", file: "Creek.mp3" },
+                { title: "Distorta Inanis", file: "Distorta Inanis.mp3" },
+                { title: "Drifting", file: "Drifting.mp3" },
+                { title: "Driving", file: "Driving.mp3" },
+                { title: "Ech", file: "Ech.mp3" },
+                { title: "Gardeners", file: "Gardeners.mp3" },
+                { title: "H4TR3D", file: "H4TR3D.mp3" },
+                { title: "HESO Squad 3", file: "HESO Squad 3.mp3" },
+                { title: "Hopk", file: "Hopk.mp3" },
+                { title: "I got nothing left behind", file: "I got nothing left behind.mp3" },
+                { title: "K0N", file: "K0N.mp3" },
+                { title: "Neh", file: "Neh.mp3" },
+                { title: "NOO00O000OO0O0OOO0", file: "NOO00O000OO0O0OOO0.mp3" },
+                { title: "Nty", file: "Nty.mp3" },
+                { title: "On Call", file: "On Call.mp3" },
+                { title: "Pohk", file: "Pohk.mp3" },
+                { title: "Reccc", file: "Reccc.mp3" },
+                { title: "Renting Support", file: "Renting Support.mp3" },
+                { title: "Rhapsody", file: "Rhapsody.mp3" },
+                { title: "Run4", file: "Run4.mp3" },
+                { title: "ST0P", file: "ST0P.mp3" },
+                { title: "The time is up", file: "The time is up.mp3" },
+                { title: "Tyance", file: "Tyance.mp3" },
+                { title: "Unbreakable Charge", file: "Unbreakable Charge.mp3" },
+                { title: "Wave", file: "Wave.mp3" },
+                { title: "Welcome Foundation", file: "Welcome Foundation.mp3" },
+                { title: "Wobble", file: "Wobble.mp3" },
+                { title: "Woodcrawlers", file: "Woodcrawlers.mp3" },
+                { title: "Yeh", file: "Yeh.mp3" },
+                { title: "你的头为什么是尖尖的", file: "你的头为什么是尖尖的.mp3" }
+            ]
         }
         // Future albums can be added here with keys like "ost-2", etc.
     };
