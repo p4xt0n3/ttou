@@ -207,6 +207,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const themeToggleButton = document.getElementById('theme-toggle');
     const body = document.body;
 
+    // Page system elements
+    const pageContainer = document.getElementById('page-container');
+    const paginationButtons = document.querySelectorAll('.page-btn');
+
     // Player elements
     const musicPlayer = document.getElementById('music-player');
     const audioPlayer = document.getElementById('audio-player');
@@ -227,6 +231,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let currentIndex = -1;
     let isPlaying = false;
     let allSongs = [];
+    let currentPage = 1;
 
     const buildAllSongsList = () => {
         allSongs = [];
@@ -243,6 +248,32 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             });
         }
+    };
+
+    const setupPagination = () => {
+        const goToPage = (pageNumber) => {
+            if (pageNumber < 1 || pageNumber > paginationButtons.length) return;
+            
+            pageContainer.style.transform = `translateX(-${(pageNumber - 1) * 100}%)`;
+
+            paginationButtons.forEach(btn => {
+                btn.classList.remove('active');
+                if (parseInt(btn.dataset.page) === pageNumber) {
+                    btn.classList.add('active');
+                }
+            });
+            
+            currentPage = pageNumber;
+        };
+
+        paginationButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                if (!button.disabled) {
+                    const pageNum = parseInt(button.dataset.page);
+                    goToPage(pageNum);
+                }
+            });
+        });
     };
 
     const setupTheme = () => {
@@ -528,6 +559,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Initialize theme
     setupTheme();
+    // Initialize pagination
+    setupPagination();
     // Build the searchable song list
     buildAllSongsList();
 });
