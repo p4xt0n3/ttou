@@ -181,6 +181,30 @@ h1 {
     animation: fadeIn 0.3s ease-out;
 }
 
+#search-view {
+    display: flex;
+    flex-direction: column;
+}
+
+#search-input {
+    width: 100%;
+    padding: 12px 15px;
+    margin-bottom: 20px;
+    border-radius: 6px;
+    border: 1px solid var(--border-secondary);
+    background-color: var(--bg-tertiary);
+    color: var(--text-primary);
+    font-size: 1rem;
+    box-sizing: border-box;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+#search-input:focus {
+    outline: none;
+    border-color: var(--border-hover);
+    box-shadow: 0 0 5px var(--glow-color);
+}
+
 @keyframes fadeIn {
     from { opacity: 0; transform: scale(0.95); }
     to { opacity: 1; transform: scale(1); }
@@ -281,6 +305,13 @@ h1 {
 
 .song-list li .song-title {
     flex-grow: 1;
+}
+
+#search-results .song-album {
+    font-size: 0.8em;
+    color: var(--text-secondary);
+    margin-left: 8px;
+    white-space: nowrap;
 }
 
 .song-list li .song-duration {
