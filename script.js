@@ -177,6 +177,41 @@ document.addEventListener('DOMContentLoaded', () => {
                 { title: "Yeh", file: "Yeh.mp3" },
                 { title: "你的头为什么是尖尖的", file: "你的头为什么是尖尖的.mp3" }
             ]
+        },
+        "ost-5": {
+            title: "The Tale of Universe #5",
+            coverArt: "moon.jpg",
+            songs: [
+                { title: "魔法少女はぜったい勝つ", file: "魔法少女はぜったい勝つ.mp3" },
+                { title: "邪悪結社", file: "邪悪結社.mp3" },
+                { title: "「Fight！最強魔法少女たちは今日も世界を救う！」", file: "「Fight！最強魔法少女たちは今日も世界を救う！」.mp3" },
+                { title: "「三重の秘密：高校魔法少女たち」", file: "「三重の秘密：高校魔法少女たち」.mp3" },
+                { title: "0FR3NT0", file: "0FR3NT0.mp3" },
+                { title: "86-79-73-68-32-73-83-32-65-80-80-82-79-65-67-72-73-78-71 (Remastered)", file: "86-79-73-68-32-73-83-32-65-80-80-82-79-65-67-72-73-78-71 (Remastered).mp3" },
+                { title: "54867319", file: "54867319.mp3" },
+                { title: "Morphin and Mimicin (Remastered)", file: "Morphin and Mimicin (Remastered).mp3" },
+                { title: "RKER!!", file: "RKER!!.mp3" },
+                { title: "The Reht", file: "The Reht.mp3" },
+                { title: "魔法少女の覚醒", file: "魔法少女の覚醒.mp3" },
+                { title: "1M C4LM L34V3 M3 4L0N3", file: "1M C4LM L34V3 M3 4L0N3.mp3" },
+                { title: "33R13", file: "33R13.mp3" },
+                { title: "Analogs", file: "Analogs.mp3" },
+                { title: "H1GH M0M3NT0", file: "H1GH M0M3NT0.mp3" },
+                { title: "L0L", file: "L0L.mp3" },
+                { title: "LK", file: "LK.mp3" },
+                { title: "Phonkage v3", file: "Phonkage v3.mp3" },
+                { title: "ReggaetonBox", file: "ReggaetonBox.mp3" },
+                { title: "sadness beyong us", file: "sadness beyong us.mp3" },
+                { title: "UW2 Reasons", file: "UW2 Reasons.mp3" },
+                { title: "M0RPH1N3", file: "M0RPH1N3.mp3" },
+                { title: "Morphine (Purple Haze 2)", file: "Morphine (Purple Haze 2).mp3" },
+                { title: "Phonkage v2", file: "Phonkage v2.mp3" },
+                { title: "phonkagev6", file: "phonkagev6.mp3" },
+                { title: "Phonks of Canada", file: "Phonks of Canada.mp3" },
+                { title: "RUNABLE", file: "RUNABLE.mp3" },
+                { title: "Stoic Bomb", file: "Stoic Bomb.mp3" },
+                { title: "Уйга", file: "Уйга.mp3" }
+            ]
         }
         // Future albums can be added here with keys like "ost-2", etc.
     };
