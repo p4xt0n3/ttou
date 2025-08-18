@@ -10,6 +10,9 @@
     <header>
         <h1>P4XT0N Music</h1>
         <div class="header-controls">
+             <button id="gacha-button" class="theme-btn" aria-label="Gacha Roll">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path></svg>
+             </button>
              <button id="search-button" class="theme-btn" aria-label="Search Songs">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
              </button>
@@ -173,6 +176,31 @@
             <span class="close-button">&times;</span>
             <div id="modal-view">
                 <!-- Content will be dynamically injected by JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <div id="gacha-modal" class="gacha-modal">
+        <div class="gacha-container">
+            <button id="gacha-close-button" class="gacha-close-button">&times;</button>
+            <div id="gacha-animation-overlay">
+                <div id="gacha-animation-orb"></div>
+            </div>
+            <div id="gacha-results-display">
+                <!-- Gacha results will be displayed here -->
+            </div>
+            <div class="gacha-info">
+                 <p>Pity: <span id="pity-counter">0</span>/100 (Guaranteed 5-Star)</p>
+            </div>
+            <div id="gacha-controls">
+                <button id="gacha-roll-1" class="gacha-roll-btn">
+                    <span class="btn-text">Roll x1</span>
+                    <span class="btn-subtext">Summon once</span>
+                </button>
+                <button id="gacha-roll-10" class="gacha-roll-btn">
+                    <span class="btn-text">Roll x10</span>
+                     <span class="btn-subtext">4-Star or higher guaranteed</span>
+                </button>
             </div>
         </div>
     </div>

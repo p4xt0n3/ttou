@@ -233,6 +233,16 @@ document.addEventListener('DOMContentLoaded', () => {
     const copyrightModal = document.getElementById('copyright-modal');
     const copyrightCloseButton = copyrightModal.querySelector('.close-button');
 
+    // Gacha Modal Elements
+    const gachaButton = document.getElementById('gacha-button');
+    const gachaModal = document.getElementById('gacha-modal');
+    const gachaCloseButton = document.getElementById('gacha-close-button');
+    const gachaResultsDisplay = document.getElementById('gacha-results-display');
+    const pityCounterDisplay = document.getElementById('pity-counter');
+    const gachaRoll1Button = document.getElementById('gacha-roll-1');
+    const gachaRoll10Button = document.getElementById('gacha-roll-10');
+    const gachaAnimationOverlay = document.getElementById('gacha-animation-overlay');
+
     // Log Panel Elements
     const logButton = document.getElementById('log-button');
     const logPanel = document.getElementById('log-panel');
@@ -267,6 +277,57 @@ document.addEventListener('DOMContentLoaded', () => {
     let isPlaying = false;
     let allSongs = [];
     let currentPage = 1;
+    let pityCounter = 0;
+
+    const gachaItems = {
+        '3': [
+            { name: "Tier I Spiritual Book Embryo" }, { name: "Tier I Spiritual Sword Embryo" },
+            { name: "Tier I Magical Sword Embryo" }, { name: "Tier I Magical Bow Embryo" },
+            { name: "Healing Mushroom" }, { name: "Book of Ventus" },
+            { name: "Tier I Spiritual Crystal" }, { name: "Tier I Healing Potion" },
+            { name: "Spiritual Magma Ore" }, { name: "Overall Dictionary" },
+            { name: "Tier I Spiritual Staff Embryo" }, { name: "Tier I Magical Dagger Embryo" },
+            { name: "Tier I Enchanted Armor Core" }, { name: "Mystic Lotus Petal" },
+            { name: "Scroll of Ignis" }, { name: "Tier I Mana Crystal" },
+            { name: "Tier I Stamina Potion" }, { name: "Ethereal Frost Ore" },
+            { name: "Universal Bestiary" }, { name: "Tier I Spirit Ring Embryo" },
+            { name: "Celestial Feather Charm" }, { name: "Book of Aqua" },
+            { name: "Tier I Spiritual Bow Embryo" }, { name: "Tier I Alchemy Catalyst" },
+            { name: "Blessed Herb Root" }, { name: "Ancient Rune Tablet" },
+            { name: "Phantom Amber Shard" }, { name: "Tier I Magical Shield Embryo" },
+            { name: "Book of Terra" }, { name: "Runic Translation Key" }
+        ],
+        '4': [
+            { name: "The Mysterious Rubix" }, { name: "Stand Arrow" }, { name: "Book of Undead" },
+            { name: "Bow of Salvation" }, { name: "Hi-Tec-Radar" }, { name: "Unawakened Scepter" },
+            { name: "Crown of Eternal Twilight" }, { name: "Phoenix Heart Core" }, { name: "Divine Gear Relic" },
+            { name: "Sword of Forgotten Kings" }, { name: "Obsidian Dragon Fang" }, { name: "Astral Compass" },
+            { name: "Moonveil Talisman" }, { name: "Crystalized Soul Fragment" }, { name: "Mask of the Thousand Faces" },
+            { name: "Bloodforged Gauntlet" }, { name: "Orb of Dimensional Rift" }, { name: "Flamebound Grimoire" },
+            { name: "Echoing Harp of Spirits" }, { name: "Starlight War Banner" },
+            { name: "M.", image: "M.jpg" }, { name: "Rewd", image: "Rewd.jpg" },
+            { name: "Saskon", image: "Saskon.jpg" }, { name: "Echer", image: "Echer.jpg" },
+            { name: "Bescre", image: "Bescre.jpg" }, { name: "Zes", image: "Zes.jpg" },
+            { name: "Trons", image: "Trons.jpg" }
+        ],
+        '5': [
+            { name: "Voidus Vacuum BaseBat" }, { name: "Sidearm Supersonic Blade" }, { name: "Requiem Arrow" },
+            { name: "The Rubix of 6th Stage Seal" }, { name: "Hypersonic Multitool" }, { name: "Scepter of Hope & Love" },
+            { name: "Joker Mask" }, { name: "Holyght Orb" }, { name: "Crown of Primordial Kings" },
+            { name: "Eternal Flame Core" }, { name: "Blade of the Abysswalker" }, { name: "Heavenpiercer Lance" },
+            { name: "Orb of Infinite Echoes" }, { name: "Wings of the Fallen Seraph" }, { name: "Dragonlord's Heartstone" },
+            { name: "Scepter of Reality's End" }, { name: "Chaosforged Armor" }, { name: "Eye of the Void Serpent" },
+            { name: "Worldshaper Hammer" }, { name: "Sacred Chalice of Aeons" }, { name: "Book of All Origins" },
+            { name: "Timeweaver's Hourglass" }, { name: "Ring of the Endless Dream" }, { name: "The SoulShatterer" }, 
+            { name: "The Devourer of Spirits" }, { name: "Soul-Through Eye" }
+        ],
+        '6': [
+            { name: "Mimic-eye of 333" }, { name: "DNA of The Perfect Alternate" }, { name: "Key of Universe" },
+            { name: "Throne of the First Cosmos" }, { name: "Blade of Transcendent Light" },
+            { name: "Heart of the Eternal Leviathan" }, { name: "Crown of the Infinite Nexus" },
+            { name: "Codex of Absolute Truth" }, { name: "The Card" }, { name: "Book of Life and Death" }, { name: "Judge's Pen" }
+        ]
+    };
 
     const buildAllSongsList = () => {
         allSongs = [];
@@ -309,6 +370,128 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             });
         });
+    };
+
+    const setupGacha = () => {
+        pityCounter = parseInt(localStorage.getItem('pityCounter') || '0');
+        updatePityDisplay();
+
+        gachaButton.addEventListener('click', () => gachaModal.classList.add('visible'));
+        gachaCloseButton.addEventListener('click', () => gachaModal.classList.remove('visible'));
+        gachaRoll1Button.addEventListener('click', handleSingleRoll);
+        gachaRoll10Button.addEventListener('click', handleTenRoll);
+    };
+
+    const updatePityDisplay = () => {
+        pityCounterDisplay.textContent = pityCounter;
+    };
+
+    const savePity = () => {
+        localStorage.setItem('pityCounter', pityCounter);
+    };
+
+    const performRoll = () => {
+        pityCounter++;
+        let rarity;
+        
+        if (pityCounter >= 100) {
+            rarity = 5;
+            pityCounter = 0;
+        } else {
+            const roll = Math.random();
+            if (roll < 0.015) rarity = 6;       // 1.5%
+            else if (roll < 0.04) rarity = 5;  // 2.5%
+            else if (roll < 0.10) rarity = 4;  // 6%
+            else rarity = 3;                   // 90% -> This adds up to 100%
+        }
+        
+        if (rarity === 5) {
+            pityCounter = 0;
+        }
+
+        const items = gachaItems[rarity];
+        const selectedItem = items[Math.floor(Math.random() * items.length)];
+
+        return { ...selectedItem, rarity };
+    };
+    
+    const displayGachaResults = (results) => {
+        gachaResultsDisplay.innerHTML = '';
+        const isSingleRoll = results.length === 1;
+
+        results.forEach((item, index) => {
+            const card = document.createElement('div');
+            card.className = `gacha-item-card rarity-${item.rarity}`;
+            
+            // Apply animation class based on roll type and position
+            if (isSingleRoll) {
+                card.classList.add('fade-in');
+            } else {
+                card.classList.add(index < 5 ? 'slide-in-left' : 'slide-in-right');
+            }
+
+            card.style.animationDelay = `${index * 0.1}s`;
+            
+            const itemImage = item.image ? `<img src="${item.image}" alt="${item.name}">` : '';
+            
+            card.innerHTML = `
+                ${itemImage}
+                <p>${item.name}</p>
+            `;
+            gachaResultsDisplay.appendChild(card);
+        });
+        updatePityDisplay();
+        savePity();
+    };
+
+    const runGachaAnimation = (results) => {
+        const highestRarity = Math.max(...results.map(item => item.rarity));
+        const animationClass = `gacha-animating-${highestRarity}`;
+        const animationDuration = {3: 2000, 4: 2500, 5: 3000, 6: 3500}[highestRarity];
+
+        // Disable roll buttons during animation
+        gachaRoll1Button.disabled = true;
+        gachaRoll10Button.disabled = true;
+        gachaCloseButton.style.display = 'none';
+
+        // Clear previous results and start animation
+        gachaResultsDisplay.innerHTML = '';
+        gachaAnimationOverlay.classList.add('active');
+        gachaAnimationOverlay.classList.add(animationClass);
+
+        setTimeout(() => {
+            // End animation and show results
+            gachaAnimationOverlay.classList.remove('active', animationClass);
+            displayGachaResults(results);
+
+            // Re-enable buttons
+            gachaRoll1Button.disabled = false;
+            gachaRoll10Button.disabled = false;
+            gachaCloseButton.style.display = 'block';
+        }, animationDuration);
+    };
+
+    const handleSingleRoll = () => {
+        const result = [performRoll()];
+        runGachaAnimation(result);
+    };
+    
+    const handleTenRoll = () => {
+        const results = [];
+        let hasHighRarity = false;
+        for (let i = 0; i < 10; i++) {
+            const result = performRoll();
+            results.push(result);
+            if(result.rarity >= 4) hasHighRarity = true;
+        }
+
+        // Guaranteed 4-star or higher in a 10-pull
+        if (!hasHighRarity) {
+            const roll4star = gachaItems['4'][Math.floor(Math.random() * gachaItems['4'].length)];
+            results[Math.floor(Math.random() * 10)] = { ...roll4star, rarity: 4 }; // replace a random one
+        }
+        
+        runGachaAnimation(results);
     };
 
     const setupTheme = () => {
@@ -594,6 +777,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Initialize theme
     setupTheme();
+    // Initialize Gacha System
+    setupGacha();
     // Initialize pagination
     setupPagination();
     // Build the searchable song list
