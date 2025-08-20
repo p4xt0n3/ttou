@@ -233,15 +233,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const copyrightModal = document.getElementById('copyright-modal');
     const copyrightCloseButton = copyrightModal.querySelector('.close-button');
 
-    // Gacha Modal Elements
+    // Gacha Redirect Modal Elements
     const gachaButton = document.getElementById('gacha-button');
-    const gachaModal = document.getElementById('gacha-modal');
-    const gachaCloseButton = document.getElementById('gacha-close-button');
-    const gachaResultsDisplay = document.getElementById('gacha-results-display');
-    const pityCounterDisplay = document.getElementById('pity-counter');
-    const gachaRoll1Button = document.getElementById('gacha-roll-1');
-    const gachaRoll10Button = document.getElementById('gacha-roll-10');
-    const gachaAnimationOverlay = document.getElementById('gacha-animation-overlay');
+    const confirmationModal = document.getElementById('confirmation-modal');
+    const confirmYesButton = document.getElementById('confirm-yes-button');
+    const confirmNoButton = document.getElementById('confirm-no-button');
 
     // Log Panel Elements
     const logButton = document.getElementById('log-button');
@@ -372,126 +368,18 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     };
 
-    const setupGacha = () => {
-        pityCounter = parseInt(localStorage.getItem('pityCounter') || '0');
-        updatePityDisplay();
-
-        gachaButton.addEventListener('click', () => gachaModal.classList.add('visible'));
-        gachaCloseButton.addEventListener('click', () => gachaModal.classList.remove('visible'));
-        gachaRoll1Button.addEventListener('click', handleSingleRoll);
-        gachaRoll10Button.addEventListener('click', handleTenRoll);
-    };
-
-    const updatePityDisplay = () => {
-        pityCounterDisplay.textContent = pityCounter;
-    };
-
-    const savePity = () => {
-        localStorage.setItem('pityCounter', pityCounter);
-    };
-
-    const performRoll = () => {
-        pityCounter++;
-        let rarity;
-        
-        if (pityCounter >= 100) {
-            rarity = 5;
-            pityCounter = 0;
-        } else {
-            const roll = Math.random();
-            if (roll < 0.015) rarity = 6;       // 1.5%
-            else if (roll < 0.04) rarity = 5;  // 2.5%
-            else if (roll < 0.10) rarity = 4;  // 6%
-            else rarity = 3;                   // 90% -> This adds up to 100%
-        }
-        
-        if (rarity === 5) {
-            pityCounter = 0;
-        }
-
-        const items = gachaItems[rarity];
-        const selectedItem = items[Math.floor(Math.random() * items.length)];
-
-        return { ...selectedItem, rarity };
-    };
-    
-    const displayGachaResults = (results) => {
-        gachaResultsDisplay.innerHTML = '';
-        const isSingleRoll = results.length === 1;
-
-        results.forEach((item, index) => {
-            const card = document.createElement('div');
-            card.className = `gacha-item-card rarity-${item.rarity}`;
-            
-            // Apply animation class based on roll type and position
-            if (isSingleRoll) {
-                card.classList.add('fade-in');
-            } else {
-                card.classList.add(index < 5 ? 'slide-in-left' : 'slide-in-right');
-            }
-
-            card.style.animationDelay = `${index * 0.1}s`;
-            
-            const itemImage = item.image ? `<img src="${item.image}" alt="${item.name}">` : '';
-            
-            card.innerHTML = `
-                ${itemImage}
-                <p>${item.name}</p>
-            `;
-            gachaResultsDisplay.appendChild(card);
+    const setupGachaRedirect = () => {
+        gachaButton.addEventListener('click', () => {
+            confirmationModal.style.display = 'block';
         });
-        updatePityDisplay();
-        savePity();
-    };
 
-    const runGachaAnimation = (results) => {
-        const highestRarity = Math.max(...results.map(item => item.rarity));
-        const animationClass = `gacha-animating-${highestRarity}`;
-        const animationDuration = {3: 2000, 4: 2500, 5: 3000, 6: 3500}[highestRarity];
+        confirmNoButton.addEventListener('click', () => {
+            confirmationModal.style.display = 'none';
+        });
 
-        // Disable roll buttons during animation
-        gachaRoll1Button.disabled = true;
-        gachaRoll10Button.disabled = true;
-        gachaCloseButton.style.display = 'none';
-
-        // Clear previous results and start animation
-        gachaResultsDisplay.innerHTML = '';
-        gachaAnimationOverlay.classList.add('active');
-        gachaAnimationOverlay.classList.add(animationClass);
-
-        setTimeout(() => {
-            // End animation and show results
-            gachaAnimationOverlay.classList.remove('active', animationClass);
-            displayGachaResults(results);
-
-            // Re-enable buttons
-            gachaRoll1Button.disabled = false;
-            gachaRoll10Button.disabled = false;
-            gachaCloseButton.style.display = 'block';
-        }, animationDuration);
-    };
-
-    const handleSingleRoll = () => {
-        const result = [performRoll()];
-        runGachaAnimation(result);
-    };
-    
-    const handleTenRoll = () => {
-        const results = [];
-        let hasHighRarity = false;
-        for (let i = 0; i < 10; i++) {
-            const result = performRoll();
-            results.push(result);
-            if(result.rarity >= 4) hasHighRarity = true;
-        }
-
-        // Guaranteed 4-star or higher in a 10-pull
-        if (!hasHighRarity) {
-            const roll4star = gachaItems['4'][Math.floor(Math.random() * gachaItems['4'].length)];
-            results[Math.floor(Math.random() * 10)] = { ...roll4star, rarity: 4 }; // replace a random one
-        }
-        
-        runGachaAnimation(results);
+        confirmYesButton.addEventListener('click', () => {
+            window.location.href = 'https://p4xt0n3.github.io/roll';
+        });
     };
 
     const setupTheme = () => {
@@ -769,6 +657,9 @@ document.addEventListener('DOMContentLoaded', () => {
         if (event.target == copyrightModal) {
             copyrightModal.style.display = 'none';
         }
+        if (event.target == confirmationModal) {
+            confirmationModal.style.display = 'none';
+        }
         // Close log panel if clicking outside of it
         if (logPanel.classList.contains('open') && !logPanel.contains(event.target) && event.target !== logButton) {
             logPanel.classList.remove('open');
@@ -777,8 +668,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Initialize theme
     setupTheme();
-    // Initialize Gacha System
-    setupGacha();
+    // Initialize Gacha Redirect
+    setupGachaRedirect();
     // Initialize pagination
     setupPagination();
     // Build the searchable song list
